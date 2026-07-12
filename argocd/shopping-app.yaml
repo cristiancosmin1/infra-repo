@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: shopping-app
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/cristiancosmin/infra-repo.git
+    targetRevision: main
+    path: charts/shopping-app
+
+    helm:
+      releaseName: shopping-app
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: shopping
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

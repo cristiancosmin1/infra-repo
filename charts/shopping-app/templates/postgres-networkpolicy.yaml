@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+
+metadata:
+  name: postgres-ingress
+  labels:
+    {{- include "shopping-app.labels" . | nindent 4 }}
+
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/instance: {{ .Release.Name }}
+
+  policyTypes:
+    - Ingress
+
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- include "shopping-app.selectorLabels" . | nindent 14 }}
+
+      ports:
+        - protocol: TCP
+          port: 5432

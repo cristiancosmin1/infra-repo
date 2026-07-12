@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/cristiancosmin/infra-repo.git
+    repoURL: https://github.com/cristiancosmin1/infra-repo.git
     targetRevision: main
     path: charts/shopping-app
 

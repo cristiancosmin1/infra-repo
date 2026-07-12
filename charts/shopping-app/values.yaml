@@ -1,0 +1,44 @@
+replicaCount: 2
+
+image:
+  repository: cristiancosmin/shopping-app 
+  tag: "1.1"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+
+  className: nginx
+
+  host: app.local
+
+database:
+  host: postgres
+  port: 5432
+  name: shopping
+
+postgresql:
+  image:
+    repository: postgres
+    tag: "16"
+    pullPolicy: IfNotPresent
+
+  service:
+    port: 5432
+
+  persistence:
+    enabled: true
+    size: 1Gi
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+  limits:
+    cpu: 500m
+    memory: 512Mi

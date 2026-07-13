@@ -1,5 +1,4 @@
 {{- if .Values.ingress.enabled }}
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 
@@ -9,23 +8,31 @@ metadata:
   labels:
     {{- include "shopping-app.labels" . | nindent 4 }}
 
+  {{- if .Values.ingress.tls.enabled }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.clusterIssuer | quote }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  {{- end }}
+
 spec:
   ingressClassName: {{ .Values.ingress.className }}
 
-  rules:
-    - host: {{ .Values.ingress.host }}
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host | quote }}
+      secretName: {{ .Values.ingress.tls.secretName }}
+  {{- end }}
 
+  rules:
+    - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
           - path: /
-
             pathType: Prefix
-
             backend:
               service:
                 name: {{ include "shopping-app.fullname" . }}
-
                 port:
                   number: {{ .Values.service.port }}
-
 {{- end }}

@@ -12,10 +12,13 @@ service:
 
 ingress:
   enabled: true
-
   className: nginx
-
   host: app.local
+
+  tls:
+    enabled: true
+    secretName: shopping-app-tls
+    clusterIssuer: selfsigned-clusterissuer
 
 database:
   host: postgres

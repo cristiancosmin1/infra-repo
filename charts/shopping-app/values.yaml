@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: cristiancosmin/shopping-app 
-  tag: "1.1"
+  tag: "df904ce"
   pullPolicy: IfNotPresent
 
 service:

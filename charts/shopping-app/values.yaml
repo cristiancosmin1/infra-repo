@@ -51,3 +51,10 @@ autoscaling:
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
+
+
+keycloak:
+  issuer: "https://auth.local/realms/devops-lvlup"
+  jwksUrl: >-
+    http://keycloak-keycloakx-http.keycloak.svc.cluster.local/realms/devops-lvlup/protocol/openid-connect/certs
+  audience: "shopping-app"

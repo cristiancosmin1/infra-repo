@@ -65,5 +65,14 @@ spec:
                   name: shopping-app-secret
                   key: DB_PASSWORD
 
+            - name: KEYCLOAK_ISSUER
+              value: {{ .Values.keycloak.issuer | quote }}
+
+            - name: KEYCLOAK_JWKS_URL
+              value: {{ .Values.keycloak.jwksUrl | quote }}
+
+            - name: KEYCLOAK_AUDIENCE
+              value: {{ .Values.keycloak.audience | quote }}
+
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

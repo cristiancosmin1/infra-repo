@@ -10,7 +10,7 @@ keycloakx:
     - "/opt/keycloak/bin/kc.sh"
 
   args:
-    - "start-dev"
+    - "start"
     - "--hostname=https://auth.local"
     - "--proxy-headers=xforwarded"
     - "--http-enabled=true"
@@ -20,6 +20,25 @@ keycloakx:
   extraEnvFrom: |
     - secretRef:
         name: keycloak-admin
+
+  extraEnv: |
+    - name: KC_DB
+      value: "postgres"
+
+    - name: KC_DB_URL
+      value: "jdbc:postgresql://keycloak-postgres.keycloak.svc.cluster.local:5432/keycloak"
+
+    - name: KC_DB_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-db-secret
+          key: POSTGRES_USER
+
+    - name: KC_DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-db-secret
+          key: POSTGRES_PASSWORD
 
   http:
     relativePath: "/"

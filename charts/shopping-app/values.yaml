@@ -58,3 +58,8 @@ keycloak:
   jwksUrl: >-
     http://keycloak-keycloakx-http.keycloak.svc.cluster.local/realms/devops-lvlup/protocol/openid-connect/certs
   audience: "shopping-app"
+
+otel:
+  exporterOtlpEndpoint: "http://opentelemetry-opentelemetry-collector.observability.svc.cluster.local:4318"
+  serviceName: "shopping-app"
+  resourceAttributes: "deployment.environment=local"

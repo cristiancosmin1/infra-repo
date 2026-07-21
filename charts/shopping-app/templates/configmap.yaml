@@ -11,3 +11,11 @@ data:
   DB_HOST: "{{ .Values.database.host }}"
   DB_PORT: "{{ .Values.database.port }}"
   DB_NAME: "{{ .Values.database.name }}"
+
+  KEYCLOAK_ISSUER: {{ .Values.keycloak.issuer | quote }}
+  KEYCLOAK_JWKS_URL: {{ .Values.keycloak.jwksUrl | quote }}
+  KEYCLOAK_AUDIENCE: {{ .Values.keycloak.audience | quote }}
+
+  OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.otel.exporterOtlpEndpoint | quote }}
+  OTEL_SERVICE_NAME: {{ .Values.otel.serviceName | quote }}
+  OTEL_RESOURCE_ATTRIBUTES: {{ .Values.otel.resourceAttributes | quote }}

@@ -42,6 +42,11 @@ opentelemetry-collector:
       debug:
         verbosity: detailed
 
+      jaeger:
+        endpoint: jaeger-collector.observability.svc.cluster.local:14250
+        tls:
+          insecure: true
+
     service:
       pipelines:
         traces:
@@ -53,6 +58,7 @@ opentelemetry-collector:
             - batch
           exporters:
             - debug
+            - jaeger
 
   ports:
     otlp:

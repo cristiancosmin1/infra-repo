@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: jaeger
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/cristiancosmin1/infra-repo.git
+    targetRevision: main
+    path: charts/jaeger
+
+    helm:
+      releaseName: jaeger
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: observability
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

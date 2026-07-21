@@ -1,0 +1,21 @@
+jaeger:
+  provisionDataStore:
+    cassandra: false
+
+  storage:
+    type: memory
+
+  allInOne:
+    enabled: true
+
+  collector:
+    enabled: true
+
+  query:
+    enabled: true
+
+  agent:
+    enabled: false
+
+  ingester:
+    enabled: false

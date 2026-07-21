@@ -1,0 +1,10 @@
+apiVersion: v2
+name: opentelemetry-platform
+description: OpenTelemetry Collector for the DevOps Level-Up platform
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: opentelemetry-collector
+    version: "*"
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts

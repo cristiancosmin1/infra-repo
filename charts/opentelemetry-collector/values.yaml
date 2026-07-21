@@ -1,0 +1,76 @@
+opentelemetry-collector:
+  mode: deployment
+
+  replicaCount: 1
+
+  image:
+    repository: otel/opentelemetry-collector-contrib
+
+  command:
+    name: otelcol-contrib
+
+  presets:
+    kubernetesAttributes:
+      enabled: true
+
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+
+      batch:
+        timeout: 5s
+        send_batch_size: 512
+
+      resource:
+        attributes:
+          - key: deployment.environment
+            value: local
+            action: upsert
+
+    exporters:
+      debug:
+        verbosity: detailed
+
+    service:
+      pipelines:
+        traces:
+          receivers:
+            - otlp
+          processors:
+            - memory_limiter
+            - resource
+            - batch
+          exporters:
+            - debug
+
+  ports:
+    otlp:
+      enabled: true
+      containerPort: 4317
+      servicePort: 4317
+      protocol: TCP
+
+    otlp-http:
+      enabled: true
+      containerPort: 4318
+      servicePort: 4318
+      protocol: TCP
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi

@@ -8,8 +8,20 @@ jaeger:
   allInOne:
     enabled: true
 
+    extraEnv:
+      - name: COLLECTOR_OTLP_ENABLED
+        value: "true"
+
   collector:
     enabled: true
+
+    service:
+      otlp:
+        grpc:
+          port: 4317
+
+        http:
+          port: 4318
 
   query:
     enabled: true

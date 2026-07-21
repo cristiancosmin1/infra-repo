@@ -44,8 +44,7 @@ opentelemetry-collector:
 
 
       otlp:
-        endpoint: jaeger-collector.observability.svc.cluster.local:4317
-
+	endpoint: jaeger-collector.observability.svc.cluster.local:4317
         tls:
           insecure: true
 

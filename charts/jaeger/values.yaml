@@ -6,11 +6,7 @@ jaeger:
     type: memory
 
   allInOne:
-    enabled: true
-
-    extraEnv:
-      - name: COLLECTOR_OTLP_ENABLED
-        value: "true"
+    enabled: false
 
   collector:
     enabled: true

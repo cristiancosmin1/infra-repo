@@ -1,0 +1,17 @@
+loki:
+  deploymentMode: SingleBinary
+
+  auth_enabled: false
+
+  singleBinary:
+    replicas: 1
+
+  test:
+    enabled: false
+
+  monitoring:
+    dashboards:
+      enabled: false
+
+    serviceMonitor:
+      enabled: false

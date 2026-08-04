@@ -9,6 +9,8 @@ metadata:
     {{- include "shopping-app.labels" . | nindent 4 }}
 
 spec:
+  storageClassName: {{ .Values.postgresql.persistence.storageClass }}
+
   accessModes:
     - ReadWriteOnce
 

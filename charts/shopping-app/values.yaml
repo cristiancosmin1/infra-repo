@@ -37,6 +37,7 @@ postgresql:
   persistence:
     enabled: true
     size: 1Gi
+    storageClass: gp2
 resources:
   requests:
     cpu: 100m

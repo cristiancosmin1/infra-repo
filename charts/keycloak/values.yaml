@@ -89,3 +89,8 @@ keycloakx:
 
   test:
     enabled: false
+   
+  postgresql:
+    persistence:
+      storageClass: gp2
+      size: 2Gi

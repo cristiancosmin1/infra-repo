@@ -1,0 +1,28 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+
+metadata:
+  name: keycloak-admin
+  namespace: keycloak
+
+spec:
+  refreshInterval: 1h
+
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-secrets-manager
+
+  target:
+    name: keycloak-admin
+    creationPolicy: Owner
+
+  data:
+    - secretKey: KC_BOOTSTRAP_ADMIN_USERNAME
+      remoteRef:
+        key: devops-levelup/staging/keycloak-admin
+        property: KC_BOOTSTRAP_ADMIN_USERNAME
+
+    - secretKey: KC_BOOTSTRAP_ADMIN_PASSWORD
+      remoteRef:
+        key: devops-levelup/staging/keycloak-admin
+        property: KC_BOOTSTRAP_ADMIN_PASSWORD

@@ -24,3 +24,27 @@ do
 done
 
 echo "platform-root Healthy."
+
+echo
+echo "Waiting for external-secrets..."
+
+until [[ "$(kubectl get application external-secrets \
+    -n argocd \
+    -o jsonpath='{.status.health.status}')" == "Healthy" ]]
+do
+    sleep 5
+done
+
+echo "external-secrets Healthy."
+
+echo
+echo "Waiting for external-secrets-config..."
+
+until [[ "$(kubectl get application external-secrets-config \
+    -n argocd \
+    -o jsonpath='{.status.health.status}')" == "Healthy" ]]
+do
+    sleep 5
+done
+
+echo "external-secrets-config Healthy."

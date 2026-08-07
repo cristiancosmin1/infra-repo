@@ -16,6 +16,7 @@ keycloakx:
     - "--http-enabled=true"
     - "--health-enabled=true"
     - "--metrics-enabled=true"
+    - "--import-realm"
 
   extraEnvFrom: |
     - secretRef:
@@ -39,6 +40,16 @@ keycloakx:
         secretKeyRef:
           name: keycloak-db-secret
           key: POSTGRES_PASSWORD
+
+  extraVolumes: |
+    - name: realm-import
+      configMap:
+        name: keycloak-realm
+
+  extraVolumeMounts: |
+    - name: realm-import
+      mountPath: /opt/keycloak/data/import
+      readOnly: true
 
   http:
     relativePath: "/"
@@ -89,7 +100,7 @@ keycloakx:
 
   test:
     enabled: false
-   
+
   postgresql:
     persistence:
       storageClass: gp2

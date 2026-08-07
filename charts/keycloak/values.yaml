@@ -79,7 +79,6 @@ keycloakx:
     annotations:
       cert-manager.io/cluster-issuer: selfsigned-clusterissuer
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
 
     rules:
       - host: auth.local

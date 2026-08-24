@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: cristiancosmin/shopping-app 
+  repository: cristiancosmin/shopping-app
   tag: "a6b3709"
   pullPolicy: IfNotPresent
 
@@ -37,7 +37,8 @@ postgresql:
   persistence:
     enabled: true
     size: 1Gi
-    storageClass: gp2
+    storageClass: ""
+
 resources:
   requests:
     cpu: 100m
@@ -53,7 +54,6 @@ autoscaling:
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
 
-
 keycloak:
   issuer: "https://auth.local/realms/devops-lvlup"
   jwksUrl: >-
@@ -63,4 +63,4 @@ keycloak:
 otel:
   exporterOtlpEndpoint: "http://opentelemetry-opentelemetry-collector.observability.svc.cluster.local:4318"
   serviceName: "shopping-app"
-  resourceAttributes: "deployment.environment=local"
+  resourceAttributes: ""

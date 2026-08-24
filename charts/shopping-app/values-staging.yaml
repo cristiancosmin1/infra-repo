@@ -1,0 +1,14 @@
+ingress:
+  host: app.local
+
+  tls:
+    enabled: true
+    secretName: shopping-app-tls
+    clusterIssuer: selfsigned-clusterissuer
+
+postgresql:
+  persistence:
+    storageClass: gp2
+
+otel:
+  resourceAttributes: "deployment.environment=staging"

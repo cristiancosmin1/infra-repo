@@ -192,6 +192,60 @@ initialize_keycloak_db_secret() {
     echo "OK: ${secret_name} initialized."
 }
 
+initialize_keycloak_users_secret() {
+    local secret_name="${PROJECT_NAME}/${ENVIRONMENT}/keycloak-users"
+
+    create_secret_if_missing "${secret_name}"
+
+    if secret_has_value "${secret_name}"; then
+        echo "OK: ${secret_name} already initialized."
+        return
+    fi
+
+    echo "Initializing ${secret_name}"
+
+    local alice_password
+    local bob_password
+    local app_admin_password
+
+    read -r -s -p "Password for alice (writer): " alice_password
+    echo
+
+    read -r -s -p "Password for bob (reader): " bob_password
+    echo
+
+    read -r -s -p "Password for application admin: " app_admin_password
+    echo
+
+    if [[ -z "${alice_password}" || -z "${bob_password}" || -z "${app_admin_password}" ]]; then
+        echo "ERROR: User passwords cannot be empty."
+        exit 1
+    fi
+
+    local secret_json
+
+    secret_json="$(jq -n \
+        --arg alice "${alice_password}" \
+        --arg bob "${bob_password}" \
+        --arg admin "${app_admin_password}" \
+        '{
+            ALICE_PASSWORD: $alice,
+            BOB_PASSWORD: $bob,
+            ADMIN_PASSWORD: $admin
+        }')"
+
+    aws secretsmanager put-secret-value \
+        --secret-id "${secret_name}" \
+        --region "${AWS_REGION}" \
+        --secret-string "${secret_json}" \
+        >/dev/null
+
+    echo "OK: ${secret_name} initialized."
+}
+
+
+
+
 wait_for_external_secret() {
     local namespace="$1"
     local name="$2"
@@ -225,6 +279,7 @@ wait_for_external_secret() {
 initialize_shopping_secret
 initialize_keycloak_admin_secret
 initialize_keycloak_db_secret
+initialize_keycloak_users_secret
 
 echo
 echo "=============================="

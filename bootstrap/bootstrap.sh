@@ -10,4 +10,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "${SCRIPT_DIR}/03-secrets.sh"
 
-"${SCRIPT_DIR}/04-verify.sh"
+"${SCRIPT_DIR}/04-keycloak-users.sh"
+
+"${SCRIPT_DIR}/05-verify.sh"

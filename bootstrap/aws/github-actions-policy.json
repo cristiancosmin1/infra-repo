@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DescribeEKSCluster",
+      "Effect": "Allow",
+      "Action": [
+        "eks:DescribeCluster"
+      ],
+      "Resource": "arn:aws:eks:eu-central-1:691862618786:cluster/devops-levelup-staging-cluster"
+    },
+    {
+      "Sid": "ReadKeycloakUsers",
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Resource": "arn:aws:secretsmanager:eu-central-1:691862618786:secret:devops-levelup/staging/keycloak-users*"
+    }
+  ]
+}

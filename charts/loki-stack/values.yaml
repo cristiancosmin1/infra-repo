@@ -5,13 +5,5 @@ loki-stack:
   grafana:
     enabled: true
 
-    additionalDataSources:
-      - name: Prometheus
-        type: prometheus
-        access: proxy
-        url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
-        isDefault: false
-        editable: false
-
   loki:
     enabled: true

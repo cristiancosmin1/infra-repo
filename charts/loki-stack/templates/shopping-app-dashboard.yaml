@@ -73,7 +73,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "100 * sum(rate(shopping_http_requests_total{status!~\"5..\"}[5m])) / sum(rate(shopping_http_requests_total[5m]))",
+              ""expr": "(100 * sum(rate(shopping_http_requests_total{status=~\"5..\"}[5m])) / sum(rate(shopping_http_requests_total[5m]))) or vector(0)",",
               "refId": "A"
             }
           ],

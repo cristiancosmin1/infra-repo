@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 
 metadata:
   name: {{ include "shopping-app.fullname" . }}
@@ -15,6 +15,23 @@ spec:
   selector:
     matchLabels:
       {{- include "shopping-app.selectorLabels" . | nindent 6 }}
+
+  strategy:
+    canary:
+      maxSurge: 1
+      maxUnavailable: 0
+
+      steps:
+        - setWeight: 25
+        - pause: {}
+
+        - setWeight: 50
+        - pause: {}
+
+        - setWeight: 75
+        - pause: {}
+
+        - setWeight: 100
 
   template:
     metadata:

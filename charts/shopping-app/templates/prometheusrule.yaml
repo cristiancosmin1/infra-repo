@@ -15,6 +15,8 @@ spec:
     - name: shopping-app.slo
       rules:
 
+        # Real SLO alert:
+        # HTTP 5xx error rate must remain below 1%.
         - alert: ShoppingAppHighErrorRate
           expr: |
             (
@@ -35,6 +37,8 @@ spec:
               Shopping App HTTP 5xx error rate has exceeded
               the 1% SLO threshold for more than 2 minutes.
 
+        # Real SLO alert:
+        # p95 latency must remain below 500 ms.
         - alert: ShoppingAppHighLatency
           expr: |
             histogram_quantile(
@@ -57,4 +61,23 @@ spec:
             description: >-
               Shopping App p95 latency has exceeded
               the 500 ms SLO threshold for more than 2 minutes.
+
+        # TEMPORARY TEST ALERT.
+        # This rule is intentionally always true so we can verify:
+        # PrometheusRule -> Prometheus -> Alertmanager.
+        # Remove this rule after the alerting test is completed.
+        - alert: ShoppingAppObservabilityTest
+          expr: vector(1)
+          for: 1m
+
+          labels:
+            severity: warning
+            service: shopping-app
+            test: "true"
+
+          annotations:
+            summary: "Shopping App observability test alert"
+            description: >-
+              Controlled alert used to validate the
+              Prometheus to Alertmanager alerting pipeline.
 {{- end }}

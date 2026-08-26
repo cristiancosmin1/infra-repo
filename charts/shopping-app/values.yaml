@@ -68,3 +68,6 @@ otel:
 monitoring:
   serviceMonitor:
     enabled: true
+
+  prometheusRule:
+    enabled: true

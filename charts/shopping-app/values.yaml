@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: cristiancosmin/shopping-app
-  tag: "aa9784b"
+  tag: "2ae66e8"
   pullPolicy: IfNotPresent
 
 service:

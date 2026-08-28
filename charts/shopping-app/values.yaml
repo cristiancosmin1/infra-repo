@@ -65,6 +65,11 @@ otel:
   serviceName: "shopping-app"
   resourceAttributes: ""
 
+chaos:
+  latency:
+    enabled: false
+    milliseconds: 1000
+
 monitoring:
   serviceMonitor:
     enabled: true

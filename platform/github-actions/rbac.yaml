@@ -29,6 +29,7 @@ rules:
       - argoproj.io
     resources:
       - applications
+      - rollouts
     verbs:
       - get
       - list

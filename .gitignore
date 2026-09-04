@@ -1,0 +1,14 @@
+# OS / editor files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+
+# Local secrets
+.env
+.env.*
+*.local.secret

@@ -30,6 +30,9 @@ data:
           "publicClient": true,
           "directAccessGrantsEnabled": true,
           "standardFlowEnabled": true,
+          "attributes": {
+            "pkce.code.challenge.method": "S256"
+          },
           "redirectUris": [
             "https://app.local/*"
           ],

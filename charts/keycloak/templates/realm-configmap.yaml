@@ -34,10 +34,10 @@ data:
             "pkce.code.challenge.method": "S256"
           },
           "redirectUris": [
-            "https://app.local/*"
+            "https://app.cdevops-levelup.ro/*"
           ],
           "webOrigins": [
-            "https://app.local"
+            "https://app.cdevops-levelup.ro"
           ],
           "protocolMappers": [
             {

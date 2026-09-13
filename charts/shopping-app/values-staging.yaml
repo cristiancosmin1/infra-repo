@@ -4,7 +4,7 @@ ingress:
   tls:
     enabled: true
     secretName: shopping-app-tls
-    clusterIssuer: selfsigned-clusterissuer
+    clusterIssuer: letsencrypt-prod
 
 postgresql:
   persistence:

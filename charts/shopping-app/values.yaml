@@ -68,7 +68,7 @@ otel:
 chaos:
   latency:
     enabled: true 
-    milliseconds: 1000
+    milliseconds: 0
 
 monitoring:
   serviceMonitor:

@@ -1,5 +1,5 @@
 ingress:
-  host: app.local
+  host: app.cdevops-levelup.ro
 
   tls:
     enabled: true
@@ -12,3 +12,6 @@ postgresql:
 
 otel:
   resourceAttributes: "deployment.environment=staging"
+
+keycloak:
+  issuer: "https://auth.cdevops-levelup.ro/realms/devops-lvlup"

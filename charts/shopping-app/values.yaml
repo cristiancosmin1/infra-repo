@@ -67,7 +67,7 @@ otel:
 
 chaos:
   latency:
-    enabled: true 
+    enabled: false 
     milliseconds: 0
 
 monitoring:
